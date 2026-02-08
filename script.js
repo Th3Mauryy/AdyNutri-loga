@@ -35,19 +35,33 @@
       const navToggle = document.querySelector('.nav-toggle');
       const navLinks = document.querySelector('.nav-links');
       const navAnchors = document.querySelectorAll('.nav-links a');
+      const navScrim = document.querySelector('.nav-scrim');
 
       if (navToggle && navLinks) {
+        const closeMenu = () => {
+          navLinks.classList.remove('is-open');
+          navToggle.classList.remove('is-open');
+          navToggle.setAttribute('aria-expanded', 'false');
+          navScrim && navScrim.classList.remove('is-open');
+        };
+
         navToggle.addEventListener('click', () => {
           const isOpen = navLinks.classList.toggle('is-open');
           navToggle.classList.toggle('is-open', isOpen);
           navToggle.setAttribute('aria-expanded', isOpen);
+          if (navScrim) navScrim.classList.toggle('is-open', isOpen);
         });
 
         navAnchors.forEach(link => {
           link.addEventListener('click', () => {
-            navLinks.classList.remove('is-open');
-            navToggle.classList.remove('is-open');
-            navToggle.setAttribute('aria-expanded', 'false');
+            closeMenu();
           });
+        });
+
+        if (navScrim) {
+          navScrim.addEventListener('click', closeMenu);
+        }
+        window.addEventListener('keyup', (e) => {
+          if (e.key === 'Escape') closeMenu();
         });
       }

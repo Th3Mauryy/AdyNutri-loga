@@ -103,6 +103,8 @@ nav a:hover::after { transform: scaleX(1); }
 .nav-actions { display: flex; align-items: center; gap: 10px; }
 .nav-actions-mobile { display: none; }
 .nav-actions a { white-space: nowrap; }
+.nav-panel { display: contents; }
+.nav-scrim { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.32); z-index: 25; }
 
 .nav-toggle {
   display: none;
@@ -125,6 +127,7 @@ nav a:hover::after { transform: scaleX(1); }
   border-radius: 999px;
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
+.nav-toggle:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(79,127,91,0.25); }
 .nav-toggle.is-open span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
 .nav-toggle.is-open span:nth-child(2) { opacity: 0; }
 .nav-toggle.is-open span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
@@ -173,6 +176,7 @@ nav a:hover::after { transform: scaleX(1); }
   gap: 30px;
   align-items: center;
 }
+.hero-copy { display: grid; gap: 12px; }
 .hero-copy h1 {
   font-family: 'Playfair Display', serif;
   font-size: clamp(32px, 5vw, 46px);
@@ -437,29 +441,32 @@ footer {
   .nav { flex-direction: row; align-items: center; gap: 10px; }
   .nav-toggle { display: inline-flex; }
   nav { width: auto; flex: 1; }
-  .nav-links { position: absolute; inset: 64px 12px auto 12px; z-index: 30; }
-  .nav-links ul {
-    display: none;
-    flex-direction: column;
+  .nav-links { position: fixed; inset: 70px 12px auto 12px; z-index: 40; display: none; }
+  .nav-links.is-open { display: block; }
+  .nav-panel {
+    display: grid;
     gap: 12px;
     padding: 14px;
-    margin: 0;
     background: #fff;
     border-radius: var(--radius-sm);
     box-shadow: var(--shadow);
-    border: 1px solid rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.06);
   }
-  .nav-links.is-open ul { display: flex; }
-  nav ul li a { padding: 6px 2px; display: block; }
+  .nav-links ul {
+    display: grid;
+    gap: 12px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+  nav ul li a { padding: 8px 4px; display: block; font-weight: 600; }
   .nav-actions-desktop { display: none; }
   .nav-actions-mobile {
-    display: none;
-    flex-direction: column;
+    display: grid;
     gap: 10px;
-    padding: 0 14px 14px;
   }
-  .nav-links.is-open .nav-actions-mobile { display: flex; }
-  .nav-actions a { padding: 10px 12px; width: 100%; text-align: center; }
+  .nav-actions a { padding: 12px 14px; width: 100%; text-align: center; }
+  .nav-scrim.is-open { display: block; }
 
   .hero {
     padding: 24px 16px 48px;
