@@ -100,6 +100,10 @@ nav a::after {
 nav a:hover { color: var(--accent-strong); }
 nav a:hover::after { transform: scaleX(1); }
 
+.nav-actions { display: flex; align-items: center; gap: 10px; }
+.nav-actions-mobile { display: none; }
+.nav-actions a { white-space: nowrap; }
+
 .nav-toggle {
   display: none;
   width: 42px;
@@ -432,12 +436,12 @@ footer {
   header { position: sticky; top: 0; }
   .nav { flex-direction: row; align-items: center; gap: 10px; }
   .nav-toggle { display: inline-flex; }
-  nav { width: auto; }
-  .nav-links { position: absolute; inset: 62px 12px auto 12px; }
+  nav { width: auto; flex: 1; }
+  .nav-links { position: absolute; inset: 64px 12px auto 12px; z-index: 30; }
   .nav-links ul {
     display: none;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     padding: 14px;
     margin: 0;
     background: #fff;
@@ -447,11 +451,15 @@ footer {
   }
   .nav-links.is-open ul { display: flex; }
   nav ul li a { padding: 6px 2px; display: block; }
-  .nav-actions {
-    margin-left: auto;
-    gap: 8px;
+  .nav-actions-desktop { display: none; }
+  .nav-actions-mobile {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 14px 14px;
   }
-  .nav-actions a { padding: 10px 12px; }
+  .nav-links.is-open .nav-actions-mobile { display: flex; }
+  .nav-actions a { padding: 10px 12px; width: 100%; text-align: center; }
 
   .hero {
     padding: 24px 16px 48px;
